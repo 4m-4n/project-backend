@@ -1,0 +1,14 @@
+import express from "express";
+import { isauthenticated } from "../middleware/authenticate.js";
+import { createques, deleteone, get1ques, getques, updateques } from "../controllers/question.js";
+import { checkrole } from "../middleware/checkrole.js";
+import { assignedinter, createinterview } from "../controllers/interview.js";
+const router=express.Router();
+router.post("/createquestion", isauthenticated,checkrole, createques);
+router.get("/getquestion", isauthenticated,checkrole, getques);
+router.get("/question/:id", isauthenticated,checkrole, get1ques);
+router.put("/question/:id", isauthenticated,checkrole, updateques);
+router.delete("/question/:id", isauthenticated,checkrole, deleteone);
+router.post("/scheduleinter",isauthenticated,checkrole,createinterview);
+router.get("/assignedinter",isauthenticated,checkrole,assignedinter);
+export default router;
